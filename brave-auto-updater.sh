@@ -1,5 +1,9 @@
 #!/bin/bash
 #
+RED="\e[31m"
+GREEN="\e[32m"
+ENDCOLOR="\e[0m"
+
 
 update_browser() {
 
@@ -14,10 +18,16 @@ update_browser() {
     cd ~/Downloads/000bravetemp
 
     echo "--> Searching and downloading latest stable Brave Browser from https://github.com/brave/brave-browser/releases"
-    wget -O brave.zip -q --show-progress https://github.com/brave/brave-browser/releases/download/v"$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)"/brave-browser-"$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)"-linux-amd64.zip
+    wget -O brave.deb -q --show-progress https://github.com/brave/brave-browser/releases/download/v"$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)"/brave-browser_"$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)"_amd64.deb
 
-    echo "--> Unziping browser"
-    unzip -qq brave.zip -d brave
+    echo "--> Extracting browser"
+    ar x brave.deb data.tar.xz
+    echo "--> brave.deb extracting complete"
+    tar -xf data.tar.xz
+    echo "--> data.tar.xz extracting complete"
+    gunzip usr/share/doc/brave-browser/changelog.gz
+    cp usr/share/doc/brave-browser/changelog opt/brave.com/brave
+    cd opt/brave.com
 
     echo "--> Moving Downloded files to installed directory"
     cp -TR brave ~/.opt/brave
@@ -34,8 +44,10 @@ update_browser() {
 
 FILE=/home/$USER/.opt/brave/brave-browser
 if [ -f "$FILE" ]; then
-    echo "Installed version: "$(~/.opt/brave/brave-browser --version)""
-    echo "Latest version: "$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)""
+
+    cd ~/.opt/brave
+    echo -e "===> Installed version: "${RED}"$(grep -Po "(?<=tag/v)([0-9]|\.)*(?=\s|$)" changelog)"${ENDCOLOR}""
+    echo -e "===> Latest version: "${RED}"$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)"${ENDCOLOR}""
 
     echo "Update browser?"
     select yn in "Yes" "No"; do
