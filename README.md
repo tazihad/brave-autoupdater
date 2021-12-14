@@ -8,8 +8,7 @@ Or Download from [Flatpak Beta](https://github.com/flathub/com.brave.Browser "Fl
 
 Flatpak version of Brave Browser does not connect with KeepassXC and does not have hardware acceleration. But Native version solves this problem.
 
-**This script is mainly intended for immutable system like Fedora Silverblue/Kinoite or Steam Deck.
-** But other distro will also work.
+**This script is mainly intended for immutable system like Fedora Silverblue/Kinoite or Steam Deck.** But other distro will also work.
 
 You have to Manually run the script to install and update Browser.
 
