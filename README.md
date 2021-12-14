@@ -21,4 +21,5 @@ To Get Application Launcher icon put `brave-browser.desktop` to `~/.local/share/
 To Delete and remove Brave Browser
 ```
 rm -rf ~/.opt/brave
+rm /home/$USER/.local/share/applications/brave-browser.desktop
 ```
