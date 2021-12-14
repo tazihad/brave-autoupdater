@@ -2,7 +2,7 @@
 Version=1.0
 Name=Brave Web Browser
 GenericName=Web Browser
-Exec=/home/$USER/.opt/brave/brave-browser --use-gl=desktop --enable-features=VaapiVideoDecoder %U
+Exec=/home/$USER/.opt/brave/brave-browser %U
 StartupNotify=true
 Terminal=false
 Icon=com.brave.Browser
@@ -13,8 +13,8 @@ Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=/home/$USER/.opt/brave/brave-browser --use-gl=desktop --enable-features=VaapiVideoDecoder
+Exec=/home/$USER/.opt/brave/brave-browser
 
 [Desktop Action new-private-window]
 Name=New Incognito Window
-Exec=/home/$USER/.opt/brave/brave-browser --use-gl=desktop --enable-features=VaapiVideoDecoder --incognito
+Exec=/home/$USER/.opt/brave/brave-browser --incognito
