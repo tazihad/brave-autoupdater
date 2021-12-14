@@ -1,5 +1,7 @@
 #### Brave Browser installer and updater script for linux.
 
+This Script will download and update Stable version of Brave Browser from [Github Release](https://github.com/brave/brave-browser/releases "Github Release")
+
 **NOTE**
 You should install Brave browser from [Official instruction](https://brave.com/linux/ "Official instruction").
 Or Download from [Flatpak Beta](https://github.com/flathub/com.brave.Browser "Flatpak Beta") (Enable Flatpak Beta Repo)
