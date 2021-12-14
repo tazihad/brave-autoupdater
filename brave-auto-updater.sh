@@ -36,20 +36,62 @@ download_browser(){
     echo "--> Removing temp folder"
     rm -rf $TEMP_DIRECTORY
 
-    echo "---: Completed :---"
+    echo "---: Download Completed :---"
 }
 
 install_browser(){
 
     download_browser;
-    echo "---: Download Completed :---"
-    echo "Note: put 'brave-browser.desktop' manually to ~/.local/share/applications/"
+
+
+    echo "Setting up..."
+    cd $INSTALLATION_DIRECTORY
+    for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
+    mkdir -p /home/$USER/.local/share/icons/hicolor/$size/apps
+		cp -rf "product_logo_${size/x*/}.png" \
+			"/home/$USER/.local/share/icons/hicolor/$size/apps/brave-desktop.png"
+	done
+    echo "Setting up application launcher icon"
+    setup_application_launcher_icon;
+    echo "---: Installation Completed :---"
 }
 
 update_browser() {
 
     download_browser;
     echo "---: Update Completed :---"
+}
+
+setup_application_launcher_icon(){
+
+    touch "/home/$USER/.local/share/applications/brave-browser.desktop"
+    FILE="/home/$USER/.local/share/applications/brave-browser.desktop"
+
+cat <<EOM >$FILE
+
+    [Desktop Entry]
+    Version=1.0
+    Name=Brave Web Browser
+    GenericName=Web Browser
+    Exec=/home/$USER/.opt/brave/brave-browser %U
+    StartupNotify=true
+    Terminal=false
+    Icon=brave-desktop
+    Type=Application
+    Categories=Network;WebBrowser;
+    MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ipfs;x-scheme-handler/ipns;
+    Actions=new-window;new-private-window;
+
+    [Desktop Action new-window]
+    Name=New Window
+    Exec=/home/$USER/.opt/brave/brave-browser
+
+    [Desktop Action new-private-window]
+    Name=New Incognito Window
+    Exec=/home/$USER/.opt/brave/brave-browser --incognito
+
+EOM
+
 }
 
 
