@@ -7,8 +7,7 @@ ENDCOLOR="\e[0m"
 INSTALLATION_DIRECTORY="/home/$USER/.opt/brave"
 TEMP_DIRECTORY="/home/$USER/Downloads/000bravetemp"
 
-update_browser() {
-
+download_browser(){
     echo "--> Removing previous temp folder"
     rm -rf $TEMP_DIRECTORY
 
@@ -38,9 +37,19 @@ update_browser() {
     rm -rf $TEMP_DIRECTORY
 
     echo "---: Completed :---"
+}
 
+install_browser(){
+
+    download_browser;
+    echo "---: Download Completed :---"
     echo "Note: put 'brave-browser.desktop' manually to ~/.local/share/applications/"
+}
 
+update_browser() {
+
+    download_browser;
+    echo "---: Update Completed :---"
 }
 
 
@@ -65,7 +74,7 @@ else
     echo "-->Do you want to install Brave Browser?"
     select yn in "Yes" "No"; do
     case $yn in
-        Yes ) update_browser; break;;
+        Yes ) install_browser; break;;
         No ) exit;;
     esac
     done
