@@ -1,11 +1,17 @@
 #!/bin/bash
 #
+
+#COLOR CODES
 RED="\e[31m"
 GREEN="\e[32m"
 ENDCOLOR="\e[0m"
 
 INSTALLATION_DIRECTORY="/home/$USER/.opt/brave"
 TEMP_DIRECTORY="/home/$USER/Downloads/000bravetemp"
+
+INSTALLED_VERSION="${RED}"$(grep -Po "(?<=tag/v)([0-9]|\.)*(?=\s|$)" $INSTALLATION_DIRECTORY/changelog)"${ENDCOLOR}"
+REMOTE_STABLE_VERSION="${RED}"$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)"${ENDCOLOR}"
+
 
 download_browser(){
     echo "--> Removing previous temp folder"
@@ -96,11 +102,12 @@ EOM
 
 
 FILE=$INSTALLATION_DIRECTORY/brave-browser
+
 if [ -f "$FILE" ]; then
 
     cd $INSTALLATION_DIRECTORY
-    echo -e "===> Installed version: "${RED}"$(grep -Po "(?<=tag/v)([0-9]|\.)*(?=\s|$)" changelog)"${ENDCOLOR}""
-    echo -e "===> Latest version: "${RED}"$(curl -s https://brave-browser-downloads.s3.brave.com/latest/release.version)"${ENDCOLOR}""
+    echo -e "===> Installed version: $INSTALLED_VERSION"
+    echo -e "===> Latest version: $REMOTE_STABLE_VERSION"
 
     echo "Update browser?"
     select yn in "Yes" "No"; do
