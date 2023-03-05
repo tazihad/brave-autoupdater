@@ -6,7 +6,7 @@ RED="\e[31m"
 GREEN="\e[32m"
 ENDCOLOR="\e[0m"
 
-INSTALLATION_DIRECTORY="/home/$USER/.opt/brave"
+INSTALLATION_DIRECTORY="/home/$USER/.var/opt/brave"
 TEMP_DIRECTORY="/home/$USER/Downloads/000bravetemp"
 
 INSTALLED_VERSION="${RED}"$(grep -Po "(?<=tag/v)([0-9]|\.)*(?=\s|$)" $INSTALLATION_DIRECTORY/changelog)"${ENDCOLOR}"
