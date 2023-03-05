@@ -79,7 +79,7 @@ cat <<EOM >$FILE
     Version=1.0
     Name=Brave Web Browser
     GenericName=Web Browser
-    Exec=/home/$USER/.opt/brave/brave-browser %U
+    Exec=/home/$USER/.var/opt/brave/brave-browser %U
     StartupNotify=true
     Terminal=false
     Icon=brave-desktop
